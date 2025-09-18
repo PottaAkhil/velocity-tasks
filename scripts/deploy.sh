@@ -51,6 +51,6 @@ SERVICE
   sudo systemctl daemon-reload
   sudo systemctl enable featherjet
 fi
-
 # Restart the service to apply the new changes
 sudo systemctl restart featherjet
+
