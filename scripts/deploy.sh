@@ -1,19 +1,25 @@
 #!/bin/bash
 set -e
 
+# Define the repository path in a user's home directory
+REPO_PATH="/home/ubuntu/velocity-tasks"
+
 # Ensure Go is installed
 if ! command -v go &> /dev/null; then
   sudo apt update
   sudo apt install -y golang-go
 fi
 
-# Navigate to repo, clone if missing
-if [ -d "/root/velocity-tasks" ]; then
-  cd /root/velocity-tasks
-  git pull origin main
+# Clone the repo into the designated path if it doesn't exist.
+# Otherwise, navigate to the folder and pull the latest changes.
+if [ ! -d "$REPO_PATH" ]; then
+  echo "Cloning the repository into $REPO_PATH..."
+  mkdir -p "$REPO_PATH"
+  git clone https://github.com/PottaAkhil/velocity-tasks.git "$REPO_PATH"
 else
-  git clone https://github.com/PottaAkhil/velocity-tasks.git /root/velocity-tasks
-  cd /root/velocity-tasks
+  echo "Repository already exists. Pulling latest changes..."
+  cd "$REPO_PATH"
+  git pull origin main
 fi
 
 # Build Go application
@@ -29,9 +35,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=root
-WorkingDirectory=/root/velocity-tasks
-ExecStart=/root/velocity-tasks/velocity-tasks
+User=ubuntu
+WorkingDirectory=/home/ubuntu/velocity-tasks
+ExecStart=/home/ubuntu/velocity-tasks/velocity-tasks
 Restart=on-failure
 
 [Install]
