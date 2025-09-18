@@ -44,7 +44,7 @@ go build -o velocity-tasks ./cmd/featherjet
 SERVICE_FILE="/etc/systemd/system/velocity-tasks.service"
 if [ ! -f "$SERVICE_FILE" ]; then
   echo "Creating systemd service..."
-  sudo tee $SERVICE_FILE > /dev/null <<SERVICE
+  sudo bash -c 'cat > /etc/systemd/system/velocity-tasks.service << "EOL"
 [Unit]
 Description=Velocity Tasks Service
 After=network.target
@@ -58,8 +58,7 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-SERVICE
-
+EOL'
   sudo systemctl daemon-reload
   sudo systemctl enable velocity-tasks
 fi
