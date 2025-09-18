@@ -22,6 +22,10 @@ else
   git pull origin main
 fi
 
+# The rest of the script needs to be able to access the repo.
+# It is a good practice to use 'cd' to the repo path.
+cd "$REPO_PATH"
+
 # Build Go application
 go build -o velocity-tasks ./cmd/featherjet
 
