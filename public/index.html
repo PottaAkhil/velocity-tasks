@@ -8,28 +8,22 @@
     <meta name="author" content="Rishabh Tamrakar">
     <meta name="keywords" content="task management, productivity, lightweight, fast, go, javascript">
     
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
     
-    <!-- Preload critical resources -->
     <link rel="preload" href="js/app.js" as="script">
     <link rel="preload" href="js/api.js" as="script">
     <link rel="preload" href="js/ui.js" as="script">
 </head>
 <body>
-    <!-- Loading Spinner -->
     <div id="loading-spinner" class="loading-spinner">
         <div class="spinner"></div>
         <p>Loading VelocityTasks...</p>
     </div>
 
-    <!-- Main Application Container -->
     <div id="app" class="app-container" style="display: none;">
-        <!-- Header -->
         <header class="header">
             <div class="header-content">
                 <div class="logo-section">
@@ -38,9 +32,9 @@
                         VelocityTasks
                     </h1>
                     <p class="app-subtitle">Ultra-Fast Task Management</p>
+                    <p class="marvels-log">All Marvels Log: Thor, Iron Man, Captain America, Hulk, Black Widow, Hawkeye.</p>
                 </div>
                 
-                <!-- Statistics Dashboard -->
                 <div class="stats-dashboard">
                     <div class="stat-card">
                         <span class="stat-number" id="total-tasks">0</span>
@@ -58,9 +52,7 @@
             </div>
         </header>
 
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Task Creation Section -->
             <section class="task-creation">
                 <div class="creation-container">
                     <form id="task-form" class="task-form">
@@ -105,7 +97,6 @@
                 </div>
             </section>
 
-            <!-- Search and Filter Section -->
             <section class="search-filter">
                 <div class="search-container">
                     <div class="search-input-wrapper">
@@ -138,25 +129,20 @@
                 </div>
             </section>
 
-            <!-- Tasks List Section -->
             <section class="tasks-section">
                 <div class="tasks-container">
-                    <!-- Empty State -->
                     <div id="empty-state" class="empty-state">
                         <div class="empty-icon">📝</div>
                         <h3>No tasks yet</h3>
                         <p>Create your first task to get started!</p>
                     </div>
 
-                    <!-- Tasks Grid -->
                     <div id="tasks-grid" class="tasks-grid">
-                        <!-- Tasks will be dynamically inserted here -->
-                    </div>
+                        </div>
                 </div>
             </section>
         </main>
 
-        <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
                 <p>&copy; 2025 VelocityTasks - Powered by FeatherJet</p>
@@ -169,7 +155,6 @@
         </footer>
     </div>
 
-    <!-- Task Modal for Editing -->
     <div id="task-modal" class="modal" style="display: none;" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-overlay" aria-hidden="true"></div>
         <div class="modal-content">
@@ -230,12 +215,9 @@
         </div>
     </div>
 
-    <!-- Toast Notifications -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true">
-        <!-- Toast notifications will be inserted here -->
-    </div>
+        </div>
 
-    <!-- Confirmation Dialog -->
     <div id="confirm-dialog" class="modal" style="display: none;" role="dialog" aria-labelledby="confirm-title" aria-hidden="true">
         <div class="modal-overlay" aria-hidden="true"></div>
         <div class="modal-content confirm-dialog">
@@ -254,12 +236,10 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="js/api.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
 
-    <!-- Service Worker Registration (for future PWA features) -->
     <script>
         // Register service worker if supported
         if ('serviceWorker' in navigator) {
