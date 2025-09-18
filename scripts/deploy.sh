@@ -2,7 +2,7 @@
 set -e
 
 # Define the repository path in a user's home directory
-REPO_PATH="/home/ubuntu/velocity-tasks"
+REPO_PATH="/home/ubuntu/featherjet"
 
 # Ensure Go is installed
 if ! command -v go &> /dev/null; then
@@ -40,8 +40,8 @@ After=network.target
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory=/home/ubuntu/velocity-tasks
-ExecStart=/home/ubuntu/velocity-tasks/featherjet
+WorkingDirectory=/home/ubuntu/featherjet
+ExecStart=/home/ubuntu/featherjet/featherjet
 Restart=on-failure
 
 [Install]
@@ -53,4 +53,5 @@ SERVICE
 fi
 # Restart the service to apply the new changes
 sudo systemctl restart featherjet
+
 
