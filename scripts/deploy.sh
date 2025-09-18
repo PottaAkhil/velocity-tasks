@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e
+
+# Ensure Go is installed
+if ! command -v go &> /dev/null; then
+  sudo apt update
+  sudo apt install -y golang-go
+fi
+
+# Navigate to repo, clone if missing
+if [ -d "/root/velocity-tasks" ]; then
+  cd /root/velocity-tasks
+  git pull origin main
+else
+  git clone https://github.com/PottaAkhil/velocity-tasks.git /root/velocity-tasks
+  cd /root/velocity-tasks
+fi
+
+# Build Go application
+go build -o velocity-tasks ./cmd/featherjet
+
+# Create systemd service if it doesn't exist
+SERVICE_FILE="/etc/systemd/system/velocity-tasks.service"
+if [ ! -f "$SERVICE_FILE" ]; then
+  sudo tee $SERVICE_FILE > /dev/null <<'SERVICE'
+[Unit]
+Description=Velocity Tasks Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/velocity-tasks
+ExecStart=/root/velocity-tasks/velocity-tasks
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+SERVICE
+
+  sudo systemctl daemon-reload
+  sudo systemctl enable velocity-tasks
+fi
+
+# Restart the service
+sudo systemctl restart velocity-tasks
