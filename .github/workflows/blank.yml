@@ -1,0 +1,28 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_KEY }}
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} << 'EOF'
+            cd ~/velocity-tasks || mkdir -p ~/velocity-tasks && cd ~/velocity-tasks
+            git pull origin main
+            go build -o velocity-tasks ./cmd/featherjet
+            sudo systemctl restart velocity-tasks
+          EOF
