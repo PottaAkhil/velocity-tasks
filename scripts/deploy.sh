@@ -18,7 +18,7 @@ if [ ! -d "$REPO_PATH" ]; then
   git clone https://github.com/PottaAkhil/velocity-tasks.git "$REPO_PATH"
 else
   echo "Repository already exists. Pulling latest changes..."
-  cd "$REPO_PATH"
+  cd "$REPO_PATH" # Change to the repository directory
   git pull origin main
 fi
 
